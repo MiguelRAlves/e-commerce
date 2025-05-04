@@ -9,7 +9,8 @@
       "moduleResolution": "node",
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
-      "types": ["node"]
+      "types": ["node"],
+      "typeRoots": ["./src/@types", "./node_modules/@types"]
     },
     "include": ["src", "prisma"],
     "exclude": ["node_modules", "dist"]
