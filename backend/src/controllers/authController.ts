@@ -4,8 +4,8 @@ import { signUpUser, signInUser } from "../services/authService";
 export const signUpController = async (req: Request, res: Response) => {
     try {
         const { name, email, password } = req.body;
-        const newUser = await signUpUser(name, email, password);
-        res.status(201).json(newUser);
+        await signUpUser(name, email, password);
+        res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
     } catch (error: any) {
         res.status(400).json({ error: error.message });
     }

@@ -1,9 +1,13 @@
 // prisma/seed.ts
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
+import { hash } from 'crypto';
 
 const prisma = new PrismaClient();
 
 async function main() {
+  const hashedPassword = await bcrypt.hash('admin123', 10);
+
   const electronics = await prisma.category.create({
     data: { name: 'Eletrônicos' },
   });
@@ -54,7 +58,7 @@ async function main() {
     data: {
       name: 'Admin',
       email: 'admin@email.com',
-      password: '123456', // hashear isso em produção
+      password: hashedPassword, // hashear isso em produção
       isAdmin: true,
     },
   });
@@ -70,4 +74,3 @@ main()
   .finally(() => {
     prisma.$disconnect();
   });
-
