@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 const getProducts = async () => {
     const products = await prisma.product.findMany({
@@ -8,7 +6,7 @@ const getProducts = async () => {
             category: true
         }
     });
-    if(products.length === 0) throw new Error('Não há produtos no estoque');
+    if(!products || products.length === 0) throw new Error('Não há produtos no estoque');
     return products;
 }
 
@@ -21,7 +19,7 @@ const getProductsById = async (id: number) => {
             category: true
         }
     });
-    if (!product) throw new Error('Produto não encontrado');
+    if (!product) throw new Error('Produto não encontrado');
     return product;
 }
 
@@ -44,7 +42,7 @@ const updateProduct = async (id:number, data: Partial<{ name: string, descriptio
             id
         }
     });
-    if (!verifyIfProductExists) throw new Error('Produto não encontrado');
+    if (!verifyIfProductExists) throw new Error('Produto não encontrado');
     
     return await prisma.product.update({ where: { id }, data})
 }
@@ -55,7 +53,7 @@ const deleteProduct = async (id: number) => {
             id
         }
     });
-    if (!verifyIfProductExists) throw new Error('Produto não encontrado');
+    if (!verifyIfProductExists) throw new Error('Produto não encontrado');
 
     return await prisma.product.delete({ where: { id } });
 }

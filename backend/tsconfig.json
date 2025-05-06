@@ -9,7 +9,7 @@
       "moduleResolution": "node",
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
-      "types": ["node"],
+      "types": ["jest", "node"],
       "typeRoots": ["./src/@types", "./node_modules/@types"]
     },
     "include": ["src", "prisma"],

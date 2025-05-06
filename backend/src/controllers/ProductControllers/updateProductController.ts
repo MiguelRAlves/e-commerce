@@ -11,7 +11,7 @@ export const updateProductController = async (req: Request, res: Response): Prom
 
   try {
     const updatedProduct = await updateProduct(Number(id), req.body);
-    res.json(updatedProduct);
+    res.status(200).json(updatedProduct);
   } catch (error: any) {
     res.status(500).json({ error: error.message || "Erro ao atualizar o produto." });
   }

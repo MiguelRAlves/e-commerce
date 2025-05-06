@@ -14,6 +14,6 @@ export const createProductController = async (req: Request, res: Response) => {
         res.status(201).json({ message: 'Produto criado com sucesso', product: newProduct });
 
     } catch (error: any) {
-        res.status(500).json({ error: error.message || 'Ocorreu um erro ao criar o produto' });
+        res.status(500).json({ error: 'Ocorreu um erro ao criar o produto' });
     }
 }
