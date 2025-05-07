@@ -14,14 +14,15 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   name      String
-  email     String   @unique
+  email     String     @unique
   password  String
-  isAdmin   Boolean  @default(false)
+  isAdmin   Boolean    @default(false)
   orders    Order[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  CartItem  CartItem[]
 }
 
 model Product {
@@ -36,6 +37,7 @@ model Product {
   orderItems  OrderItem[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+  CartItem    CartItem[]
 }
 
 model Category {
@@ -63,6 +65,16 @@ model OrderItem {
   product   Product @relation(fields: [productId], references: [id])
   quantity  Int
   unitPrice Float
+}
+
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
 }
 
 model Payment {

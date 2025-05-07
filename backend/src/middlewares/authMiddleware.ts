@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { JwtPayload } from "../types/jwtPayload";
+import { AuthenticatedRequest } from "../types/AuthenticatedRequest";
 
 const JWT_SECRET = process.env.JWT_SECRET || 'jwt_secret';
 
@@ -14,7 +15,7 @@ export const authenticateUser = (req: Request, res: Response, next: NextFunction
     
     try{
         const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
-        req.user = decoded;
+        (req as AuthenticatedRequest).user = decoded;
         next();
     } catch (error) {
         res.status(401).json({ message: "Token inválido ou expirado" });

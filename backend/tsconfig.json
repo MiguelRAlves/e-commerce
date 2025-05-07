@@ -10,7 +10,11 @@
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
       "types": ["jest", "node"],
-      "typeRoots": ["./src/@types", "./node_modules/@types"]
+      "typeRoots": ["./src/@types", "./node_modules/@types"],
+      "baseUrl": ".", 
+      "paths": {
+        "@/*": ["src/*"]
+      }
     },
     "include": ["src", "prisma"],
     "exclude": ["node_modules", "dist"]

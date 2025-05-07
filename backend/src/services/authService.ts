@@ -41,7 +41,7 @@ export const signInUser = async (email: string, password: string) => {
     }
 
     const token = jwt.sign(
-        { userId: user.id, isAdmin: user.isAdmin },
+        { id: user.id, isAdmin: user.isAdmin },
         JWT_SECRET,
         { expiresIn: '1d' }
     )
