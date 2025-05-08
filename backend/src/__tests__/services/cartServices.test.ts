@@ -1,5 +1,5 @@
-import { prisma } from "../lib/prisma";
-import * as cartService from "../services/cartServices";
+import { prisma } from "../../lib/prisma";
+import * as cartService from "../../services/cartServices";
 
 jest.mock("@/lib/prisma", () => ({
   prisma: {

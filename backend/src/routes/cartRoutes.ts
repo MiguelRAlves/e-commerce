@@ -12,11 +12,6 @@ const router = Router();
 
 router.use(authenticateUser);
 
-router.use((req, res, next) => {
-    console.log("User no middleware do carrinho:", req.user);
-    next();
-});  
-
 router.get("/", getUserCartItemsController);
 router.post("/:productId", addItemToCartController);
 router.put("/:productId", updateCartItemQuantityController);

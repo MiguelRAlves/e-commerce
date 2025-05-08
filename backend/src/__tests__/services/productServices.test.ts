@@ -1,5 +1,5 @@
-import { getProducts, getProductsById, createProduct, updateProduct, deleteProduct } from "../services/productServices";
-import { prisma } from "../lib/prisma";
+import { getProducts, getProductsById, createProduct, updateProduct, deleteProduct } from "../../services/productServices";
+import { prisma } from "../../lib/prisma";
 
 jest.mock("@/lib/prisma", () => ({
     prisma: {
