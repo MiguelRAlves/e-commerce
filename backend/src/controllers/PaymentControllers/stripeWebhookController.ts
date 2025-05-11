@@ -1,8 +1,9 @@
-// src/controllers/PaymentControllers/stripeWebhookController.ts
 import { Request, Response } from "express";
 import Stripe from "stripe";
 import { stripe } from "../../lib/stripe";
 import { prisma } from "../../lib/prisma";
+import { sendOrderConfirmationEmail } from "../../services/emailService";
+
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
@@ -13,8 +14,8 @@ export const stripeWebhookController = async (req: Request, res: Response) => {
 
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    console.log("EVENTO RECEBIDO", event.type);
   } catch (err: any) {
-    console.log(`⚠️  Webhook signature verification failed.`, err.message);
     res.status(400).send(`Webhook Error: ${err.message}`);
     return
   }
@@ -23,6 +24,7 @@ export const stripeWebhookController = async (req: Request, res: Response) => {
     event.type === "checkout.session.completed" ||
     event.type === "checkout.session.async_payment_succeeded"
   ) {
+    console.log("Session completed");
     const session = event.data.object as Stripe.Checkout.Session;
 
     if (session.payment_status === "paid") {
@@ -33,30 +35,34 @@ export const stripeWebhookController = async (req: Request, res: Response) => {
           where: { id: orderId },
           data: { status: "paid" },
         });
-
-        console.log(`✅ Pedido ${orderId} marcado como pago.`);
-      } else {
-        console.log("⚠️ Metadata não contém orderId.");
       }
-    } else {
-      console.log(`⚠️ Sessão concluída mas pagamento não confirmado. Status: ${session.payment_status}`);
     }
   }
 
   if (event.type === "payment_intent.succeeded") {
+    console.log("Payment intent succeeded");
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
     const orderId = Number(paymentIntent.metadata?.orderId);
 
-    if (orderId) {
-      await prisma.order.update({
-        where: { id: orderId },
-        data: { status: "paid" },
-      });
+    const order = await prisma.order.update({
+      where: { id: orderId },
+      data: { status: "paid" },
+      include: {
+        orderItems: { include: { product: true } },
+        user: true,
+      },
+    });
 
-      console.log(`✅ Pedido ${orderId} marcado como pago via PaymentIntent.`);
-    } else {
-      console.log("⚠️ PaymentIntent sem orderId nos metadados.");
+    for (const item of order.orderItems) {
+      await prisma.product.update({
+        where: { id: item.productId },
+        data: {
+          stock: { decrement: item.quantity },
+        },
+      });
     }
+
+    await sendOrderConfirmationEmail(order);
   }
 
   res.json({ received: true });
