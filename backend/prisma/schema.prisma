@@ -86,3 +86,10 @@ model Payment {
   transactionId String
   createdAt     DateTime @default(now())
 }
+
+model RevokedToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}

@@ -14,7 +14,6 @@ export const stripeWebhookController = async (req: Request, res: Response) => {
 
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-    console.log("EVENTO RECEBIDO", event.type);
   } catch (err: any) {
     res.status(400).send(`Webhook Error: ${err.message}`);
     return
@@ -24,7 +23,6 @@ export const stripeWebhookController = async (req: Request, res: Response) => {
     event.type === "checkout.session.completed" ||
     event.type === "checkout.session.async_payment_succeeded"
   ) {
-    console.log("Session completed");
     const session = event.data.object as Stripe.Checkout.Session;
 
     if (session.payment_status === "paid") {
@@ -40,7 +38,6 @@ export const stripeWebhookController = async (req: Request, res: Response) => {
   }
 
   if (event.type === "payment_intent.succeeded") {
-    console.log("Payment intent succeeded");
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
     const orderId = Number(paymentIntent.metadata?.orderId);
 
