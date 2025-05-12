@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { signUpUser, signInUser } from "../services/authService";
 import { prisma } from "../lib/prisma";
+import rateLimit from 'express-rate-limit';
 
 export const signUpController = async (req: Request, res: Response) => {
     try {
@@ -51,3 +52,9 @@ export const logoutController = async (req: Request, res: Response) => {
         return
     }
 };
+
+export const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Muitas requisições vindas deste IP, tente novamente mais tarde."
+});

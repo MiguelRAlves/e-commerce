@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import helmet from 'helmet';
+import { limiter } from './controllers/authController';
+
 
 import authRoutes from './routes/authRoutes';
 import productRoutes from './routes/productRoutes';
@@ -8,12 +11,15 @@ import cartRoutes from './routes/cartRoutes';
 import orderRoutes from './routes/orderRoutes'
 import paymentRoutes from './routes/paymentRoutes';
 import bodyParser from 'body-parser';
+
 import { stripeWebhookController } from './controllers/PaymentControllers/stripeWebhookController';
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
+app.use(helmet());
+app.use(limiter);
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), stripeWebhookController);
 app.use(express.json());
 
