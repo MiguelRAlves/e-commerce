@@ -17,6 +17,7 @@
     "react-hook-form": "^7.56.3",
     "react-router-dom": "^7.6.0",
     "react-toastify": "^11.0.5",
+    "sass": "^1.88.0",
     "zustand": "^5.0.4"
   },
   "devDependencies": {

@@ -1,0 +1,95 @@
+.Container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(-45deg, #d0ebff, #ffc9c9, #d0bfff, #f1f3f5);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.FormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25rem;
+    min-height: 12.5rem;
+    background-color: #bcbec0;
+    border-radius: 0.625rem;
+    gap: 3rem;
+    padding: 0.625rem;
+    > h2{
+        color: rgb(34, 34, 34);
+    }
+    span{
+        color: rgb(34, 34, 34);
+    }
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 25rem;
+}
+
+.InputContainer {
+    display: flex;
+    flex-direction: column;
+    > label {
+        color: rgb(34, 34, 34);
+    } p {
+        margin: 0;
+        color: rgb(241, 18, 18);
+    }
+}
+
+.Input {
+    width: 18.75rem;
+    height: 2.1875rem;
+    border-radius: 0.3125rem;
+    background-color: rgb(224, 223, 223);
+    border: none;
+    color: black;
+
+    &:hover {
+        background-color: rgb(180, 170, 170);
+        transition: 0.2s;
+    }
+}
+
+.FormButton{
+    height: 2.1875rem;
+    width: 6.25rem;
+    border-radius: 0.3125rem;
+    background-color: rgb(224, 223, 223);
+    border: none;
+    color: black;
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(180, 170, 170);
+        transition: 0.2s;
+    }
+}
+
+.SwitchAuthPages{
+    cursor: pointer;
+}

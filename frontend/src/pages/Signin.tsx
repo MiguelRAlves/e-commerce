@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import useAuthStore from "../store/useAuthStore";
+import styles from "../styles/Auth.module.scss";
 
 type SigninFormData = {
   email: string;
@@ -41,38 +42,43 @@ export default function Signin() {
     }
   };
 
+  const handleClick = () => navigate("/signup");
+
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>E-mail</label>
-          <input
-            type="email"
-            {...register("email", {
-              required: "E-mail é obrigatório",
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: "E-mail inválido",
-              },
-            })}
-          />
-          {errors.email && <p>{errors.email.message}</p>}
-        </div>
+    <div className={styles.Container}>
+      <div className={styles.FormContainer}>
+        <h2>Login</h2>
+        <form className={styles.Form} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.InputContainer}>
+            <label>E-mail</label>
+            <input className={styles.Input}
+              type="email"
+              {...register("email", {
+                required: "E-mail é obrigatório",
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: "E-mail inválido",
+                },
+              })}
+            />
+            {errors.email && <p>{errors.email.message}</p>}
+          </div>
 
-        <div>
-          <label>Senha</label>
-          <input
-            type="password"
-            {...register("password", {
-              required: "Senha é obrigatória",
-            })}
-          />
-          {errors.password && <p>{errors.password.message}</p>}
-        </div>
+          <div className={styles.InputContainer}>
+            <label>Senha</label>
+            <input className={styles.Input}
+              type="password"
+              {...register("password", {
+                required: "Senha é obrigatória",
+              })}
+            />
+            {errors.password && <p>{errors.password.message}</p>}
+          </div>
 
-        <button type="submit">Entrar</button>
-      </form>
+          <button className={styles.FormButton} type="submit">Entrar</button>
+        </form>
+        <span>Ainda não possui uma conta? <a className={styles.SwitchAuthPages} onClick={handleClick}>Clique aqui</a></span>
+      </div>
     </div>
   );
 }

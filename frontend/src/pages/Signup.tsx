@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import styles from "../styles/Auth.module.scss";
 
 type SignupFormData = {
     name: string;
@@ -40,64 +41,69 @@ export default function Signup() {
         }
     };
 
+    const handleClick = () => navigate("/signin");
+
     const password = watch("password");
 
     return (
-        <div>
-            <h2>Cadastro</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <label>Nome</label>
-                    <input {...register("name", { required: "Nome é obrigatório" })} />
-                    {errors.name && <p>{errors.name.message}</p>}
-                </div>
+        <div className={styles.Container}>
+            <div className={styles.FormContainer}>
+                <h2>Cadastro</h2>
+                <form className={styles.Form} onSubmit={handleSubmit(onSubmit)}>
+                    <div className={styles.InputContainer}>
+                        <label>Nome</label>
+                        <input className={styles.Input} {...register("name", { required: "Nome é obrigatório" })} />
+                        {errors.name && <p>{errors.name.message}</p>}
+                    </div>
 
-                <div>
-                    <label>E-mail</label>
-                    <input
-                        type="email"
-                        {...register("email", {
-                            required: "E-mail é obrigatório",
-                            pattern: {
-                                value: /^\S+@\S+$/i,
-                                message: "E-mail inválido",
-                            },
-                        })}
-                    />
-                    {errors.email && <p>{errors.email.message}</p>}
-                </div>
+                    <div className={styles.InputContainer}>
+                        <label>E-mail</label>
+                        <input className={styles.Input}
+                            type="email"
+                            {...register("email", {
+                                required: "E-mail é obrigatório",
+                                pattern: {
+                                    value: /^\S+@\S+$/i,
+                                    message: "E-mail inválido",
+                                },
+                            })}
+                        />
+                        {errors.email && <p>{errors.email.message}</p>}
+                    </div>
 
-                <div>
-                    <label>Senha</label>
-                    <input
-                        type="password"
-                        {...register("password", {
-                            required: "Senha é obrigatória",
-                            minLength: {
-                                value: 6,
-                                message: "A senha precisa de pelo menos 6 caracteres",
-                            },
-                        })}
-                    />
-                    {errors.password && <p>{errors.password.message}</p>}
-                </div>
+                    <div className={styles.InputContainer}>
+                        <label>Senha</label>
+                        <input className={styles.Input}
+                            type="password"
+                            {...register("password", {
+                                required: "Senha é obrigatória",
+                                minLength: {
+                                    value: 6,
+                                    message: "A senha precisa de pelo menos 6 caracteres",
+                                },
+                            })}
+                        />
+                        {errors.password && <p>{errors.password.message}</p>}
+                    </div>
 
-                <div>
-                    <label>Confirmar Senha</label>
-                    <input
-                        type="password"
-                        {...register("confirmPassword", {
-                            required: "Confirme sua senha",
-                            validate: (value) =>
-                                value === password || "As senhas não coincidem",
-                        })}
-                    />
-                    {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
-                </div>
+                    <div className={styles.InputContainer}>
+                        <label>Confirmar Senha</label>
+                        <input className={styles.Input}
+                            type="password"
+                            {...register("confirmPassword", {
+                                required: "Confirme sua senha",
+                                validate: (value) =>
+                                    value === password || "As senhas não coincidem",
+                            })}
+                        />
+                        {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+                    </div>
 
 
-                <button type="submit">Cadastrar</button>
-            </form>
+                    <button className={styles.FormButton} type="submit">Cadastrar</button>
+                </form>
+                <span> Já possui uma conta? <a className={styles.SwitchAuthPages} onClick={handleClick}>Entrar</a></span>
+            </div>
         </div>
     );
 }
