@@ -3,6 +3,8 @@ import api from "../services/api";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.scss";
+import ProductCard from "../components/ProductCard/ProductCard";
+import { useCart } from "../hooks/useCart";
 
 interface Product {
     id: string;
@@ -20,13 +22,14 @@ const Home = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [categoryFilter, setCategoryFilter] = useState("Todas");
     const [searchTerm, setSearchTerm] = useState("");
+    const { setCart } = useCart();
     const onClick = async () => {
         try {
             await api.post('/api/auth/logout')
         } catch (err) {
             console.error("Erro ao fazer logout", err)
         } finally {
-            logout();
+            logout(setCart);
             localStorage.removeItem('token');
             navigate('/signin');
         }
@@ -71,13 +74,13 @@ const Home = () => {
                 <ul className={styles.ProductsContainer}>
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map(product => (
-                        <li key={product.id} className={styles.Product}>
-                            <img className={styles.ProductImage} src={product.imageUrl} alt={product.name} />
-                            <div className={styles.ProductInfo}>
-                                <p className={styles.ProductName}>{product.name}</p>
-                                <span>R$ {product.price}</span>
-                            </div>
-                        </li>
+                            <ProductCard
+                                key={product.id}
+                                id={product.id}
+                                name={product.name}
+                                imageUrl={product.imageUrl}
+                                price={product.price}
+                            />
                     )))
                     : (
                         <p className={styles.NoProducts}>Nenhum produto encontrado</p>

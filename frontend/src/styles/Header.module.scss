@@ -8,6 +8,7 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
 
   .Title {
@@ -18,6 +19,80 @@
 
     &:hover {
       color: #007bff;
+    }
+  }
+
+
+  .CartContainer {
+    position: relative;
+  }
+
+  .CartButton {
+    background: transparent;
+    border: none;
+    color: #333;
+    font-size: 1.8rem;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      color: #007bff;
+    }
+  }
+
+  .CartCount {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: #ff3b3b;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0 6px;
+    border-radius: 50%;
+  }
+
+  .CartDropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    color: #333;
+    width: 350px;
+    margin-top: 0.5rem;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+    z-index: 999;
+  }
+
+  .EmptyMessage {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+  }
+
+  .CartItems {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .CheckoutButton {
+    width: 100%;
+    padding: 0.5rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background: #0056b3;
     }
   }
 }

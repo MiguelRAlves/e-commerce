@@ -1,0 +1,48 @@
+.CartItem{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 70px
+}
+
+.CartItemImage{
+    height: 60px;
+    min-width: 60px;
+}
+
+.CartItemInfo{
+    display: flex;
+    flex-direction: column;
+    max-height: 60px;
+    padding-right: 30px;
+    width: 100%;
+    > p {
+        color: rgb(37, 129, 216);
+        font-size: 20px;
+        margin: 0;
+        font-weight: 500;
+        &:hover {
+            color: rgb(9, 82, 150);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+    }
+}
+
+.CartItemPrice{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    > p {
+        color: black;
+        font-size: 18px;
+        margin: 0;
+    }
+    > span {
+        color: black;
+        font-size: 18px;
+        margin: 0;
+        font-weight: 500;
+    }
+}

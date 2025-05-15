@@ -1,9 +1,10 @@
 import { create } from 'zustand';
+import type { CartItem } from '../types/CartItem';
 
 interface AuthState {
   token: string | null;
   setToken: (token: string) => void;
-  logout: () => void;
+  logout: (setCart?: (items: CartItem[]) => void) => void;
 }
 
 const useAuthStore = create<AuthState>((set) => ({
@@ -12,11 +13,11 @@ const useAuthStore = create<AuthState>((set) => ({
     localStorage.setItem("token", token);
     set({ token });
   },
-  logout: () => {
+  logout: (setCart) => {
     localStorage.removeItem("token");
+    if (setCart) setCart([]);
     set({ token: null });
   },
 }));
-
 
 export default useAuthStore;

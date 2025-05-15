@@ -61,26 +61,6 @@
     width: 700px;
 }
 
-.ProductImage {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-}
-
-.Product {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    align-items: center;
-    border: 2px solid #b4b4b4;
-
-    &:hover {
-        background-color: #f1f3f5;
-        transition: 0.2s;
-    }
-}
 
 .NoProducts{
     font-size: 40px;
@@ -88,25 +68,6 @@
     width: 700px;
     text-align: center;
     color: white;
-}
-
-.ProductInfo {
-    display: flex;
-    flex-direction: column;
-
-    >p,
-    span {
-        color: black;
-    }
-}
-
-.ProductName {
-    font-size: 16px;
-    margin: 0;
-
-    &:hover {
-        color: #1a6fac
-    }
 }
 
 .LogoutButton {
