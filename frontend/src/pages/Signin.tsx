@@ -1,4 +1,3 @@
-// src/pages/Signin.tsx
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -50,8 +49,8 @@ export default function Signin() {
         <h2>Login</h2>
         <form className={styles.Form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.InputContainer}>
-            <label>E-mail</label>
-            <input className={styles.Input}
+            <label htmlFor="email">E-mail</label>
+            <input id="email" className={styles.Input}
               type="email"
               {...register("email", {
                 required: "E-mail é obrigatório",
@@ -65,8 +64,8 @@ export default function Signin() {
           </div>
 
           <div className={styles.InputContainer}>
-            <label>Senha</label>
-            <input className={styles.Input}
+            <label htmlFor="password">Senha</label>
+            <input id="password" className={styles.Input}
               type="password"
               {...register("password", {
                 required: "Senha é obrigatória",

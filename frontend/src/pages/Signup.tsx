@@ -1,4 +1,3 @@
-// src/pages/Signup.tsx
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -51,14 +50,13 @@ export default function Signup() {
                 <h2>Cadastro</h2>
                 <form className={styles.Form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.InputContainer}>
-                        <label>Nome</label>
-                        <input className={styles.Input} {...register("name", { required: "Nome é obrigatório" })} />
+                        <label htmlFor="name">Nome</label>
+                        <input id="name" className={styles.Input} {...register("name", { required: "Nome é obrigatório" })} />
                         {errors.name && <p>{errors.name.message}</p>}
                     </div>
-
                     <div className={styles.InputContainer}>
-                        <label>E-mail</label>
-                        <input className={styles.Input}
+                        <label htmlFor="email">E-mail</label>
+                        <input id="email" className={styles.Input}
                             type="email"
                             {...register("email", {
                                 required: "E-mail é obrigatório",
@@ -70,10 +68,9 @@ export default function Signup() {
                         />
                         {errors.email && <p>{errors.email.message}</p>}
                     </div>
-
                     <div className={styles.InputContainer}>
-                        <label>Senha</label>
-                        <input className={styles.Input}
+                        <label htmlFor="password">Senha</label>
+                        <input id="password" className={styles.Input}
                             type="password"
                             {...register("password", {
                                 required: "Senha é obrigatória",
@@ -85,10 +82,9 @@ export default function Signup() {
                         />
                         {errors.password && <p>{errors.password.message}</p>}
                     </div>
-
                     <div className={styles.InputContainer}>
-                        <label>Confirmar Senha</label>
-                        <input className={styles.Input}
+                        <label htmlFor="confirmpassword">Confirmar Senha</label>
+                        <input id="confirmpassword" className={styles.Input}
                             type="password"
                             {...register("confirmPassword", {
                                 required: "Confirme sua senha",
@@ -98,8 +94,6 @@ export default function Signup() {
                         />
                         {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
                     </div>
-
-
                     <button className={styles.FormButton} type="submit">Cadastrar</button>
                 </form>
                 <span> Já possui uma conta? <a className={styles.SwitchAuthPages} onClick={handleClick}>Entrar</a></span>
