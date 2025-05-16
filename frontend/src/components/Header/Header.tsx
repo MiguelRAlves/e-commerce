@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import styles from "../styles/Header.module.scss";
-import { useCart } from "../hooks/useCart";
+import styles from "./Header.module.scss";
+import { useCart } from "../../hooks/useCart";
 import { useState, useRef, useEffect } from "react";
-import CartItemPreview from "./CartItem/CartItemPreview";
+import CartItemPreview from "../CartItem/CartItemPreview";
 
 const Header = () => {
   const { cart } = useCart();
@@ -11,7 +11,6 @@ const Header = () => {
 
   const totalQuantity = cart?.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
-  // Fecha dropdown clicando fora
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -50,6 +49,7 @@ const Header = () => {
                       <CartItemPreview key={item.product.id} item={item} />
                     ))}
                   </ul>
+                  <p className={styles.SubtotalPrice}>Total: R$ {cart?.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2)}</p>
                   <button
                     className={styles.CheckoutButton}
                     onClick={() => alert("Finalizar pedido")}

@@ -3,9 +3,10 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProductDetails from "./pages/ProductDetails";
 
 
 function AppRoutes() {
@@ -21,6 +22,7 @@ function AppRoutes() {
         <Route path="/signin" element={<Signin />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
         </Route>
       </Routes>
     </>

@@ -2,23 +2,25 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    height: 70px
+    height: 4.375rem;
+    background-color: rgb(235, 235, 235);
+    border-radius: 0.625rem;
 }
 
 .CartItemImage{
-    height: 60px;
-    min-width: 60px;
+    height: 3.75rem;
+    min-width: 3.75rem;
 }
 
 .CartItemInfo{
     display: flex;
     flex-direction: column;
-    max-height: 60px;
-    padding-right: 30px;
+    max-height: 3.75rem;
+    padding-right: 1.875rem;
     width: 100%;
     > p {
         color: rgb(37, 129, 216);
-        font-size: 20px;
+        font-size: 1.25rem;
         margin: 0;
         font-weight: 500;
         &:hover {
@@ -36,13 +38,28 @@
     align-items: center;
     > p {
         color: black;
-        font-size: 18px;
+        font-size: 1.125rem;
         margin: 0;
     }
     > span {
         color: black;
-        font-size: 18px;
+        font-size: 1.125rem;
         margin: 0;
         font-weight: 500;
+    }
+}
+
+.CartItemRemoveButton{
+    color: white;
+    background-color: rgb(226, 87, 87);
+    border: 0.0625rem solid rgb(112, 19, 19);
+    border-radius: 0.3125rem;
+    margin: 0;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(180, 0, 0);
+        transition: 0.2s;
     }
 }

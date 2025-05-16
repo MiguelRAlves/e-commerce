@@ -1,0 +1,87 @@
+.Container {
+  display: flex;
+  gap: 2rem;
+  padding: 4rem;
+}
+
+.Image {
+  max-width: 18.75rem;
+  border-radius: 0.5rem;
+}
+
+.InfoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #18212b;
+}
+
+.ProductInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-bottom: 1.875rem;
+  > p {
+    margin: 0;
+    color: #18212b;
+    font-weight: 600;
+  }
+
+  > .Description {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.QuantityContainer {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.QuantityButton {
+  background-color: #18212b;
+  border: none;
+  padding: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.QuantityInput {
+  width: 3.125rem;
+  text-align: center;
+  padding: 0.4rem;
+  font-size: 1rem;
+  background-color: #18212b;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.Subtotal{
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #264d36;
+}
+
+.Price {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #27ae60;
+}
+
+.AddToCart {
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
