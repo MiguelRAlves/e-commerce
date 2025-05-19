@@ -66,6 +66,34 @@
     z-index: 999;
   }
 
+  .CartHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.625rem;
+
+    >p {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .ClearCartButton {
+      background-color: rgb(226, 87, 87);
+      border: 0.0625rem solid rgb(112, 19, 19);
+      color: white;
+      padding: 0.3125rem 0.625rem;
+      border-radius: 0.3125rem;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(180, 0, 0);
+        transition: 0.2s;
+      }
+    }
+  }
+
   .EmptyMessage {
     text-align: center;
     font-style: italic;
@@ -83,7 +111,7 @@
     overflow-y: auto;
   }
 
-  .SubtotalPrice{
+  .SubtotalPrice {
     margin-bottom: 0.4375rem;
     font-weight: 600;
   }
