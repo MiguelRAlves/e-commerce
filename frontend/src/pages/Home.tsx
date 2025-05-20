@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import useAuthStore from "../store/useAuthStore";
-import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.scss";
 import ProductCard from "../components/ProductCard/ProductCard";
-import { useCart } from "../hooks/useCart";
 
 interface Product {
     id: string;
@@ -17,23 +14,10 @@ interface Product {
 }
 
 const Home = () => {
-    const logout = useAuthStore(state => state.logout);
-    const navigate = useNavigate();
     const [products, setProducts] = useState<Product[]>([]);
     const [categoryFilter, setCategoryFilter] = useState("Todas");
     const [searchTerm, setSearchTerm] = useState("");
-    const { setCart } = useCart();
-    const onClick = async () => {
-        try {
-            await api.post('/api/auth/logout')
-        } catch (err) {
-            console.error("Erro ao fazer logout", err)
-        } finally {
-            logout(setCart);
-            localStorage.removeItem('token');
-            navigate('/signin');
-        }
-    }
+
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -87,7 +71,6 @@ const Home = () => {
                     )}
                 </ul>
             </div>
-            <button className={styles.LogoutButton} onClick={onClick}>Logout</button>
         </div>
     );
 }

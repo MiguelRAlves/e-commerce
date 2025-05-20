@@ -22,12 +22,17 @@ export default function Signin() {
 
   const navigate = useNavigate();
 
+  const setUser = useAuthStore(state => state.setUser);
+
   const onSubmit = async (data: SigninFormData) => {
     try {
       const response = await api.post("/auth/signin", data);
-
       const token = response.data.token;
+
       setToken(token);
+
+      const userResponse = await api.get("/auth/me");
+      setUser(userResponse.data);
 
       toast.success("Login realizado com sucesso!");
       navigate("/");

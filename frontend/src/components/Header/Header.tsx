@@ -4,11 +4,19 @@ import { useCart } from "../../hooks/useCart";
 import { useState, useRef, useEffect } from "react";
 import CartItemPreview from "../CartItem/CartItemPreview";
 import api from "../../services/api";
+import useAuthStore from "../../store/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { cart, setCart } = useCart();
-  const [open, setOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate();
+
+  const [cartOpen, setCartOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const cartDropdownRef = useRef<HTMLDivElement>(null);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
 
   const totalQuantity = cart?.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
@@ -44,13 +52,29 @@ const Header = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setOpen(false);
+      if (cartDropdownRef.current && !cartDropdownRef.current.contains(event.target as Node)) {
+        setCartOpen(false);
+      }
+      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target as Node)) {
+        setUserDropdownOpen(false);
       }
     };
-    if (open) document.addEventListener("mousedown", handleClickOutside);
+
+    document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [open]);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+          await api.post('/api/auth/logout')
+        } catch (err) {
+            console.error("Erro ao fazer logout", err)
+        } finally {
+            logout(setCart);
+            localStorage.removeItem('token');
+            navigate('/signin');
+        }
+  };
 
   return (
     <header className={styles.MainHeader}>
@@ -59,45 +83,60 @@ const Header = () => {
           E-Commerce Rest
         </Link>
 
-        <div className={styles.CartContainer} ref={dropdownRef}>
-          <button
-            className={styles.CartButton}
-            onClick={() => setOpen((prev) => !prev)}
-            aria-label="Abrir carrinho"
-          >
-            🛒
-            {totalQuantity > 0 && <span className={styles.CartCount}>{totalQuantity}</span>}
-          </button>
+        <div className={styles.RightSection}>
+          <div className={styles.CartContainer} ref={cartDropdownRef}>
+            <button
+              className={styles.CartButton}
+              onClick={() => setCartOpen((prev) => !prev)}
+              aria-label="Abrir carrinho"
+            >
+              🛒
+              {totalQuantity > 0 && <span className={styles.CartCount}>{totalQuantity}</span>}
+            </button>
 
-          {open && (
-            <div className={styles.CartDropdown}>
-              {Array.isArray(cart) && cart.length === 0 ? (
-                <p className={styles.EmptyMessage}>Seu carrinho está vazio.</p>
-              ) : (
-                <>
-                  <div className={styles.CartHeader}>
-                    <p>Carrinho</p>
-                    <button onClick={handleClearCart} className={styles.ClearCartButton}>
-                      Esvaziar carrinho
+            {cartOpen && (
+              <div className={styles.CartDropdown}>
+                {Array.isArray(cart) && cart.length === 0 ? (
+                  <p className={styles.EmptyMessage}>Seu carrinho está vazio.</p>
+                ) : (
+                  <>
+                    <div className={styles.CartHeader}>
+                      <p>Carrinho</p>
+                      <button className={styles.ClearCartButton} onClick={handleClearCart}>Esvaziar carrinho</button>
+                    </div>
+                    <ul className={styles.CartItems}>
+                      {cart?.map((item) => (
+                        <CartItemPreview key={item.product.id} item={item} />
+                      ))}
+                    </ul>
+                    <p className={styles.SubtotalPrice}>
+                      Total: R$ {cart?.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2)}
+                    </p>
+                    <button
+                      className={styles.CheckoutButton}
+                      onClick={handleCheckout}
+                    >
+                      Finalizar pedido
                     </button>
-                  </div>
-                  <ul className={styles.CartItems}>
-                    {cart?.map((item) => (
-                      <CartItemPreview key={item.product.id} item={item} />
-                    ))}
-                  </ul>
-                  <p className={styles.SubtotalPrice}>Total: R$ {cart?.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2)}</p>
-                  <button
-                    className={styles.CheckoutButton}
-                    onClick={handleCheckout}
-                    aria-label="Finalizar pedido"
-                  >
-                    Finalizar pedido
-                  </button>
-                </>
-              )}
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+
+          <div className={`${styles.UserDropdown} ${userDropdownOpen ? styles.Open : ""}`} ref={userDropdownRef}>
+            <button
+              className={styles.UserButton}
+              onClick={() => setUserDropdownOpen((prev) => !prev)}
+            >
+              Olá, {user?.name || "usuário"} ⬇
+            </button>
+
+            <div className={styles.UserDropdownContent}>
+              <Link to="/meus-pedidos">Meus pedidos</Link>
+              <button className={styles.LogoutButton} onClick={handleLogout}>Logout</button>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </header>
