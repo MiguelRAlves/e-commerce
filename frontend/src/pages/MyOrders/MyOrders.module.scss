@@ -1,0 +1,87 @@
+.MyOrders {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .Order {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #fafafa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    .OrderHeader {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      > span {
+        font-weight: 600;
+        color: #333;
+      }
+    }
+
+    .OrderProducts {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .Product {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        background: white;
+        padding: 0.5rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+        &:hover {
+          background-color: #e4e6e7;
+          transition: 0.3s;
+        }
+
+        .ProductImage {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+
+        .ProductName{
+          font-weight: 700;
+          color: #333;
+        }
+
+        .ProductDescription{
+          font-weight: 600;
+          color: #333;
+        }
+
+        .ProductQuantity{
+          font-weight: 600;
+          color: #333;
+        }
+
+        .ProductPrice {
+          font-weight: 600;
+          color: #333;
+        }
+
+        h4 {
+          margin: 0;
+        }
+
+        p {
+          margin: 0.25rem 0;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}

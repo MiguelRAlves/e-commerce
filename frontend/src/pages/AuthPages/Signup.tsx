@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
-import styles from "../styles/Auth.module.scss";
+import api from "../../services/api";
+import styles from "./Auth.module.scss";
 
 type SignupFormData = {
     name: string;

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../services/api";
-import styles from "../styles/ProductDetails.module.scss";
-import "../App.css"
-import { useCart } from "../hooks/useCart";
-import { getUserCartItems } from "../services/getUserCartItems";
+import api from "../../services/api";
+import styles from "./ProductDetails.module.scss";
+import "../../App.css"
+import { useCart } from "../../hooks/useCart";
+import { getUserCartItems } from "../../services/getUserCartItems";
 
 interface Category {
     id: number;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import api from "../services/api";
-import styles from "../styles/Home.module.scss";
-import ProductCard from "../components/ProductCard/ProductCard";
+import api from "../../services/api";
+import styles from "./Home.module.scss";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 interface Product {
     id: string;

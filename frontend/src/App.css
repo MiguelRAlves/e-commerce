@@ -1,6 +1,6 @@
 #root {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100dvh;
+  width: 100dvw;
 
   background: linear-gradient(-45deg, #d0ebff, #ffc9c9, #d0bfff, #f1f3f5);
   background-size: 400% 400%;

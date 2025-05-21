@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
-import Home from "./pages/Home";
+import Signup from "../src/pages/AuthPages/Signup";
+import Signin from "../src/pages/AuthPages/Signin";
+import Home from "../src/pages/Home/Home";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Header from "./components/Header/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ProductDetails from "./pages/ProductDetails";
+import ProductDetails from "../src/pages/ProductDetails/ProductDetails";
+import MyOrders from "./pages/MyOrders/MyOrders";
 
 
 function AppRoutes() {
@@ -23,6 +24,7 @@ function AppRoutes() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/meus-pedidos" element={<MyOrders />} />
         </Route>
       </Routes>
     </>
