@@ -13,9 +13,9 @@ const CartItemPreview = ({ item }: Props) => {
   const handleClick = async () => {
     try {
       await api.delete(`/cart/${item.product.id}`);
+      alert("Produto removido do carrinho.");
       const updatedCart = await getUserCartItems();
       setCart(updatedCart);
-      alert("Produto removido do carrinho.");
     } catch (error) {
       console.error("Erro ao remover item do carrinho:", error);
     }

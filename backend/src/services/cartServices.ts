@@ -6,7 +6,7 @@ const getUserCartItems = async (userId: number) => {
     where: { userId },
     include: { product: true }
   });
-  if (!cartItems || cartItems.length === 0) throw new Error("Carrinho vazio");
+
   return cartItems;
 };
 

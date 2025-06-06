@@ -42,8 +42,8 @@ const Header = () => {
 
     try {
       await api.delete("/cart/");
-      setCart([]);
       alert("Carrinho esvaziado.");
+      setCart([]);
     } catch (error) {
       console.error("Erro ao esvaziar o carrinho:", error);
       alert("Erro ao esvaziar o carrinho.");
