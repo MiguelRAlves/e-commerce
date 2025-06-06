@@ -5,6 +5,7 @@ import styles from "./ProductDetails.module.scss";
 import "../../App.css"
 import { useCart } from "../../hooks/useCart";
 import { getUserCartItems } from "../../services/getUserCartItems";
+import { toast } from "react-toastify";
 
 interface Category {
     id: number;
@@ -43,7 +44,7 @@ const ProductDetails = () => {
     const handleAddToCart = async () => {
         if (!product) return;
         if (product.stock < quantity) {
-            alert("Quantidade indisponivel");
+            toast.error("Quantidade indisponível");
             return;
         }
 
@@ -51,7 +52,7 @@ const ProductDetails = () => {
             await api.post(`/cart/${product.id}`, { quantity });
             const updatedCart = await getUserCartItems();
             setCart(updatedCart);
-            alert("Produto adicionado ao carrinho!");
+            toast.success("Produto adicionado ao carrinho com sucesso!");
         } catch (error) {
             console.error("Erro ao adicionar ao carrinho:", error);
             alert("Erro ao adicionar ao carrinho.");

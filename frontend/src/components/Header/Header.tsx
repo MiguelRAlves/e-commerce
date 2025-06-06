@@ -6,6 +6,9 @@ import CartItemPreview from "../CartItem/CartItemPreview";
 import api from "../../services/api";
 import useAuthStore from "../../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Header = () => {
   const { cart, setCart } = useCart();
@@ -36,18 +39,31 @@ const Header = () => {
     }
   };
 
-  const handleClearCart = async () => {
-    const confirmClear = window.confirm("Tem certeza que deseja esvaziar o carrinho?");
-    if (!confirmClear) return;
-
-    try {
-      await api.delete("/cart/");
-      alert("Carrinho esvaziado.");
-      setCart([]);
-    } catch (error) {
-      console.error("Erro ao esvaziar o carrinho:", error);
-      alert("Erro ao esvaziar o carrinho.");
-    }
+  const handleClearCart = () => {
+    setCartOpen(false);
+    confirmAlert({
+      title: 'Confirmar ação',
+      message: 'Tem certeza que deseja esvaziar o carrinho?',
+      buttons: [
+        {
+          label: 'Sim',
+          onClick: async () => {
+            try {
+              await api.delete("/cart/");
+              setCart([]);
+              toast.success("Carrinho esvaziado com sucesso!");
+            } catch (error) {
+              console.error("Erro ao esvaziar o carrinho:", error);
+              toast.error("Erro ao esvaziar o carrinho.");
+            }
+          }
+        },
+        {
+          label: 'Cancelar',
+          onClick: () => { }
+        }
+      ]
+    });
   };
 
   useEffect(() => {
@@ -66,14 +82,14 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-          await api.post('/api/auth/logout')
-        } catch (err) {
-            console.error("Erro ao fazer logout", err)
-        } finally {
-            logout(setCart);
-            localStorage.removeItem('token');
-            navigate('/signin');
-        }
+      await api.post('/api/auth/logout')
+    } catch (err) {
+      console.error("Erro ao fazer logout", err)
+    } finally {
+      logout(setCart);
+      localStorage.removeItem('token');
+      navigate('/signin');
+    }
   };
 
   return (

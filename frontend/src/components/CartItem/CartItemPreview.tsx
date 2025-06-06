@@ -4,6 +4,7 @@ import api from "../../services/api";
 import { getUserCartItems } from "../../services/getUserCartItems";
 import { useCart } from "../../hooks/useCart";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type Props = {
   item: CartItem;
@@ -19,7 +20,7 @@ const CartItemPreview = ({ item }: Props) => {
   const handleRemoveItemFromCart = async () => {
     try {
       await api.delete(`/cart/${item.product.id}`);
-      alert("Produto removido do carrinho.");
+      toast.success("Produto removido do carrinho com sucesso!");
       const updatedCart = await getUserCartItems();
       setCart(updatedCart);
     } catch (error) {
