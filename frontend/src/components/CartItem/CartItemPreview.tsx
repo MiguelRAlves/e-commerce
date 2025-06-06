@@ -3,6 +3,7 @@ import type { CartItem } from "../../types/CartItem";
 import api from "../../services/api";
 import { getUserCartItems } from "../../services/getUserCartItems";
 import { useCart } from "../../hooks/useCart";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   item: CartItem;
@@ -10,7 +11,12 @@ type Props = {
 
 const CartItemPreview = ({ item }: Props) => {
   const { setCart } = useCart();
-  const handleClick = async () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/product/${item.product.id}`);
+  }
+  const handleRemoveItemFromCart = async () => {
     try {
       await api.delete(`/cart/${item.product.id}`);
       alert("Produto removido do carrinho.");
@@ -30,11 +36,11 @@ const CartItemPreview = ({ item }: Props) => {
         alt={item.product.name}
       />
       <div className={styles.CartItemInfo}>
-        <p className={styles.CartItemName}>{item.product.name}</p>
+        <p onClick={handleNavigate} className={styles.CartItemName}>{item.product.name}</p>
         <div className={styles.CartItemPrice}>
           <p><span>Qtd:</span> {item.quantity}</p>
           <span>R$ {(item.product.price * item.quantity).toFixed(2)}</span>
-          <button className={styles.CartItemRemoveButton} onClick={handleClick}>Remover</button>
+          <button className={styles.CartItemRemoveButton} onClick={handleRemoveItemFromCart}>Remover</button>
         </div>
       </div>
     </li>
