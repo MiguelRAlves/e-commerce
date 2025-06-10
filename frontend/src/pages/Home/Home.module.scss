@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding-top: 200px;
     align-items: center;
     background: linear-gradient(-45deg, #d0ebff, #ffc9c9, #d0bfff, #f1f3f5);
     background-size: 400% 400%;
@@ -28,6 +28,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 
     >h1 {
         color: black;
@@ -55,12 +56,40 @@
 
 
 .ProductsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-    width: 43.75rem;
-}
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  width: 80%;
+  min-width: 450px;
+  max-width: 740px;
+  gap: 1rem;
+  padding: 0;
 
+  @media (max-width: 500px) {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    width: 90%;
+    min-width: 300px;
+
+    scrollbar-width: auto;
+    scrollbar-color: #888 transparent;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 4px;
+    }
+  }
+}
 
 .NoProducts{
     font-size: 2.5rem;
