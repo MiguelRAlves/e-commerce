@@ -30,8 +30,8 @@ export const createCheckoutSession = async (orderId: number, userId: number) => 
         orderId: order.id.toString(),
       },
     },
-    success_url: `http://localhost:4000/success?orderId=${order.id}`,
-    cancel_url: `http://localhost:4000/cancel?orderId=${order.id}`,
+    success_url: `https://e-commerce-2fes.onrender.com/success?orderId=${order.id}`,
+    cancel_url: `https://e-commerce-2fes.onrender.com/cancel?orderId=${order.id}`,
   });
 
   return session.url;
