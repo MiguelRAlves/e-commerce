@@ -7,7 +7,9 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "generate": "prisma generate",
     "seed": "ts-node prisma/seed.ts",
-    "migrate": "prisma migrate dev"
+    "migrate": "prisma migrate dev",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",

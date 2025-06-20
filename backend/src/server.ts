@@ -18,7 +18,10 @@ import { stripeWebhookController } from './controllers/PaymentControllers/stripe
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ['https://seu-frontend.vercel.app'], // ✅ substitui pela URL do seu frontend na Vercel
+  credentials: true
+}));
 app.use(helmet());
 app.use(limiter);
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), stripeWebhookController);
