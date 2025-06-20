@@ -26,7 +26,7 @@ app.use(helmet());
 app.use(limiter);
 app.post('/webhook', bodyParser.raw({ type: 'application/json' }), stripeWebhookController);
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "..", "public")));
+app.use(express.static(path.join(process.cwd(), "public")));
 
 app.use('/api/auth', authRoutes);
 
@@ -36,10 +36,10 @@ app.use('/api/orders', orderRoutes)
 app.use('/api/payment', paymentRoutes)
 
 app.get("/success", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public", "success.html"));
+  res.sendFile(path.join(process.cwd(), "public", "success.html"));
 });
 app.get("/cancel", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public", "cancel.html"));
+  res.sendFile(path.join(process.cwd(), "public", "cancel.html"));
 });
 
 const port = process.env.PORT || 4000;
