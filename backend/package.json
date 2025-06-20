@@ -9,7 +9,7 @@
     "seed": "ts-node prisma/seed.ts",
     "migrate": "prisma migrate dev",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/src/server.js"
   },
   "keywords": [],
   "author": "",
