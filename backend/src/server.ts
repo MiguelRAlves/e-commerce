@@ -19,7 +19,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: ['https://seu-frontend.vercel.app'], // ✅ substitui pela URL do seu frontend na Vercel
+  origin: ['https://e-commerce-ruddy-two-35.vercel.app/signin'],
   credentials: true
 }));
 app.use(helmet());
