@@ -19,7 +19,10 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: ['https://e-commerce-ruddy-two-35.vercel.app'],
+  origin: [
+    'http://localhost:5173',
+    'https://e-commerce-ruddy-two-35.vercel.app'
+  ],
   credentials: true
 }));
 app.use(helmet());
