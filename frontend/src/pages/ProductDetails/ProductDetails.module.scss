@@ -6,7 +6,7 @@
 }
 
 .Image {
-  max-width: 500px;
+  max-width: 31.25rem;
   border-radius: 0.5rem;
 }
 
@@ -20,7 +20,7 @@
   font-size: 4rem;
   font-weight: bold;
   color: #18212b;
-  margin: 10px 0 20px 0;
+  margin: 0.625rem 0 1.25rem 0;
   color: #0c3463;
   background: linear-gradient(270deg, #EA8D8D, #A890FE);
   background-size: 400% 400%;
@@ -49,7 +49,7 @@
   flex-direction: column;
   gap: 0.625rem;
   margin-bottom: 1.875rem;
-  font-size: 30px;
+  font-size: 1.875rem;
 
   
   > p {
@@ -110,6 +110,7 @@
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
+  width: 20rem;
 
   &:hover {
     background-color: #2980b9;
@@ -125,7 +126,7 @@
     font-size: clamp(3rem, 5vw, 5rem);
   }
   .Image {
-    max-width: clamp(280px, 40vw, 500px);
+    max-width: clamp(17.5rem, 40vw, 31.25rem);
   }
 }
 
@@ -135,17 +136,26 @@
     align-items: center;
   }
   .Image {
-    max-width: 350px;
+    max-width: 21.875rem;
   }
   .InfoContainer{
     align-self: self-start;
-    padding: 0 30px;
+    padding: 0 1.875rem;
     width: 80%;
     > .Name{
       align-self: center;
     }; .AddToCart{
       align-self: center;
-      width: 200px;
+      width: 12.5rem;
     }
+  }
+}
+
+@media(max-width: 424px){
+  .Name {
+    font-size: 2rem;
+  }
+  .ProductInfo {
+    font-size: 1rem;
   }
 }

@@ -71,8 +71,13 @@
     z-index: 999;
 
     @media (max-width: 768px) {
-      width: 370px;
-      right: -150px;
+      width: 23.125rem;
+      right: -9.375rem;
+    };
+
+    @media(max-width: 424px) {
+      width: 17.5rem;
+      right: -7.8125rem;
     }
   }
 
@@ -176,7 +181,7 @@
       z-index: 999;
 
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateY(-0.625rem);
       pointer-events: none;
       transition: opacity 0.3s ease, transform 0.3s ease;
 

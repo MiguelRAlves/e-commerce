@@ -1,4 +1,3 @@
-// src/contexts/CartContext.tsx
 import React, { useEffect, useState } from "react";
 import { getUserCartItems } from "../services/getUserCartItems";
 import type { CartItem } from "../types/CartItem";

@@ -93,3 +93,18 @@
 .SwitchAuthPages{
     cursor: pointer;
 }
+
+@media(max-width: 424px){
+    .FormContainer{
+        width: 18rem;
+    }
+    .Form{
+        width: 18rem;
+    }
+    .Input{
+        width: 15rem;
+    }
+    span{
+        font-size: 0.8125rem;
+    }
+}

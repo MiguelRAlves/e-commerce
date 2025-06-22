@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 200px;
+    padding-top: 12.5rem;
     align-items: center;
     background: linear-gradient(-45deg, #d0ebff, #ffc9c9, #d0bfff, #f1f3f5);
     background-size: 400% 400%;
@@ -38,7 +38,6 @@
 
 .Filters {
     display: flex;
-    gap: 1rem;
     margin-bottom: 2rem;
     justify-content: center;
     gap: 2.5rem;
@@ -52,15 +51,21 @@
         border: 1px solid #ccc;
         font-size: 1rem;
     }
+    @media(max-width: 424px){
+        gap: 0.5rem;
+        > input{
+            width: 10rem;
+        }
+    }
 }
 
 
 .ProductsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
   width: 80%;
-  min-width: 450px;
-  max-width: 740px;
+  min-width: 28.125rem;
+  max-width: 46.25rem;
   gap: 1rem;
   padding: 0;
 
@@ -70,14 +75,14 @@
     flex-wrap: nowrap;
     gap: 1rem;
     width: 90%;
-    min-width: 300px;
+    min-width: 18.75rem;
 
     scrollbar-width: auto;
     scrollbar-color: #888 transparent;
     scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
-      height: 8px;
+      height: 0.5rem;
     }
 
     &::-webkit-scrollbar-track {
